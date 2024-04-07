@@ -18,8 +18,8 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack {
-                ScrollView {
+            ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
+                ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: adaptive, spacing: 15) {
                         SummaryView(amount: 1500, currency: "₺", type: "Balance", icon: "equal.circle.fill", iconBG: .blue)
                         SummaryView(amount: 1500, currency: "₺", type: "Average", icon: "plusminus.circle.fill", iconBG: .blue)
@@ -42,14 +42,27 @@ struct HomeView: View {
                         ListView()
                         ListView()
                         ListView()
-                        ListView()
-                        ListView()
-                        ListView()
-                        ListView()
-                        ListView()
-                        
                     }
                 }
+                
+                HStack {
+                    Button(action: {
+                        print("Plus Button")
+                    }, label: {
+                        ZStack {
+                            Circle()
+                                .frame(width: 55, height: 55)
+                                .foregroundStyle(Color(.black))
+                            Image(systemName: "plus")
+                                .foregroundStyle(Color(.white))
+                                .font(.system(size: 28))
+                                
+                        }
+                        
+                            
+                    })
+                }
+                .padding(.all, 25)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Text("My Wallet")
@@ -65,13 +78,7 @@ struct HomeView: View {
                     }
                 }
             }
-            
         }
-       
-        
-        
-            
-           
     }
 }
 
