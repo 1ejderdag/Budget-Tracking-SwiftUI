@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     
+    @EnvironmentObject var transactionVM: TransactionViewModel
+    
     private let adaptive =
     [
         GridItem(.adaptive(minimum: 150), spacing: 15)
@@ -21,6 +23,7 @@ struct HomeView: View {
             ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: adaptive, spacing: 15) {
+                        
                         SummaryView(amount: 1500, currency: "₺", type: "Balance", icon: "equal.circle.fill", iconBG: .blue)
                         SummaryView(amount: 1500, currency: "₺", type: "Average", icon: "plusminus.circle.fill", iconBG: .blue)
                         SummaryView(amount: 1500, currency: "₺", type: "Income", icon: "plus.circle.fill", iconBG: .blue)
@@ -47,7 +50,8 @@ struct HomeView: View {
                 
                 HStack {
                     Button(action: {
-                        print("Plus Button")
+                        //AddView(transactionVM: <#T##TransactionViewModel#>)
+                        //await CategoryViewModel().createDefaultCategoris()
                     }, label: {
                         ZStack {
                             Circle()
@@ -72,6 +76,7 @@ struct HomeView: View {
                     }
                     ToolbarItem(placement: .topBarTrailing) {
                         Text("Settings")
+                            .monospaced()
                             .font(.headline)
                             .fontWeight(.semibold)
                             .foregroundStyle(Color(.blue))

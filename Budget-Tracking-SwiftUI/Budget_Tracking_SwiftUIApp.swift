@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import FirebaseCore
 
 @main
 struct Budget_Tracking_SwiftUIApp: App {
+    
+    init() {
+        FirebaseApp.configure()
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AddView(transactionVM: TransactionViewModel())
         }
     }
 }
