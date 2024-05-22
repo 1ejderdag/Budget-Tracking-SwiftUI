@@ -39,8 +39,7 @@ struct HomeView: View {
                     })
                     .pickerStyle(SegmentedPickerStyle())
                     
-                    
-                    VStack {
+                    LazyVStack {
                         ListView()
                         ListView()
                         ListView()
@@ -50,8 +49,7 @@ struct HomeView: View {
                 
                 HStack {
                     Button(action: {
-                        //AddView(transactionVM: <#T##TransactionViewModel#>)
-                        //await CategoryViewModel().createDefaultCategoris()
+                        print("plus button clicked")
                     }, label: {
                         ZStack {
                             Circle()
@@ -60,10 +58,7 @@ struct HomeView: View {
                             Image(systemName: "plus")
                                 .foregroundStyle(Color(.white))
                                 .font(.system(size: 28))
-                                
                         }
-                        
-                            
                     })
                 }
                 .padding(.all, 25)
@@ -74,12 +69,17 @@ struct HomeView: View {
                             .fontWeight(.bold)
                             .foregroundStyle(Color(.black))
                     }
+                    
                     ToolbarItem(placement: .topBarTrailing) {
-                        Text("Settings")
-                            .monospaced()
-                            .font(.headline)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(Color(.blue))
+                        NavigationLink {
+                            ProfileView()
+                        } label: {
+                            Image(systemName: "person")
+                                .frame(width: 35, height: 35)
+                                .foregroundStyle(Color(.white))
+                                .background(Color(.gray))
+                                .clipShape(Circle())
+                        }
                     }
                 }
             }

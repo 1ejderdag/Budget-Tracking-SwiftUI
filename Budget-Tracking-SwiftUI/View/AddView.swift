@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct AddView: View {
     
@@ -58,10 +59,11 @@ struct AddView: View {
                     
                     VStack(alignment: .leading) {
                         Section("ENTER AMOUNT") {
-                            TextField("-100", value: $amount, formatter: formatter)
+                            TextField("amount", value: $amount, formatter: formatter)
                                 .frame(maxWidth: .infinity, minHeight: 50)
                                 .background(Color(.secondarySystemBackground))
                                 .clipShape(RoundedRectangle(cornerRadius: 15))
+                                
                         }
                         .font(.caption)
 
@@ -77,28 +79,52 @@ struct AddView: View {
                         .font(.caption)
                     }
                     VStack(alignment: .leading) {
+                        
                         Text("CATEGORIES")
                             .font(.caption)
                             
                         LazyVGrid(columns: gridColumns, spacing: 25) {
-                            ForEach(1...8, id: \.self){ _ in
-                                VStack {
-                                    ZStack {
-                                        Circle()
-                                            .fill()
-                                            .frame(width: 70)
-                                            .foregroundStyle(Color(.red))
+                            if selectionPicker == .expense {
+                                ForEach(DefaultCategories().defaultExpenseCategories, id: \.self){ category in
+                                    VStack {
+                                        ZStack {
+                                            Circle()
+                                                .fill()
+                                                .frame(width: 70)
+                                                .foregroundStyle(Color(.lightGray))
+                                                
                                             
+                                            Image(systemName: category.icon)
+                                                .font(.system(size: 35))
+                                                .foregroundStyle(Color(.white))
+                                        }
                                         
-                                        Image(systemName: "cross.case")
-                                            .font(.system(size: 35))
-                                            .foregroundStyle(Color(.white))
-                                    }
-                                    
-                                    Text("Groceries")
+                                        Text(category.name)
 
+                                    }
+                                }
+
+                            } else {
+                                ForEach(DefaultCategories().defaultIncomeCategories, id: \.self){ category in
+                                    VStack {
+                                        ZStack {
+                                            Circle()
+                                                .fill()
+                                                .frame(width: 70)
+                                                .foregroundStyle(Color.green)
+                                                
+                                            
+                                            Image(systemName: category.icon)
+                                                .font(.system(size: 35))
+                                                .foregroundStyle(Color(.white))
+                                        }
+                                        
+                                        Text(category.name)
+
+                                    }
                                 }
                             }
+                            
                         }
                         .padding(10)
                     }

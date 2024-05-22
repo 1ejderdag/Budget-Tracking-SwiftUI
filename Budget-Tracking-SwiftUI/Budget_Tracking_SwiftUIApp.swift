@@ -11,13 +11,18 @@ import FirebaseCore
 @main
 struct Budget_Tracking_SwiftUIApp: App {
     
+    @StateObject var authViewModel = AuthViewModel()
+    
     init() {
         FirebaseApp.configure()
     }
     
     var body: some Scene {
         WindowGroup {
-            AddView(transactionVM: TransactionViewModel())
+            NavigationStack {
+                ContentView()
+            }
+            .environmentObject(authViewModel)
         }
     }
 }
