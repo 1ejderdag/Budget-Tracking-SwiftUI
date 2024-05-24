@@ -20,7 +20,7 @@ struct ContentView: View {
                 LoginView()
             } else {
                 // giriş yapmış kullanıcı var
-                mainInterface
+                HomeView()
             }
         }
     }
@@ -30,13 +30,6 @@ struct ContentView: View {
 //    ContentView()
 //}
 
-extension ContentView {
-    var mainInterface: some View {
-        ZStack(alignment: .topLeading) {
-            HomeView()
-        }
-    }
-}
 
 /*
  var mainInterface: some View {

@@ -16,7 +16,6 @@ struct LoginView: View {
     var body: some View {
         
         // parent container
-        
         VStack {
             
             AuthHeaderView(row1: "Hello.", row2: "Welcome Back")

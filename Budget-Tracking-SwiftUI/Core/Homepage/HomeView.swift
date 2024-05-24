@@ -9,8 +9,6 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @EnvironmentObject var transactionVM: TransactionViewModel
-    
     private let adaptive =
     [
         GridItem(.adaptive(minimum: 150), spacing: 15)

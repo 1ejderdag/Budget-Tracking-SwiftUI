@@ -7,16 +7,20 @@
 
 import Firebase
 import SwiftUI
+import FirebaseAuth
 
 class AuthViewModel: ObservableObject {
     
-    @Published var userSession: FirebaseAuth.User?
+    @Published var userSession = Auth.auth().currentUser
     @Published var didAuthenticateUser = false
     @Published var currentUser: User?
-    private var tempUserSession: FirebaseAuth.User?
+    //private var tempUserSession: FirebaseAuth.User?
+    let userService = UserService()
     
     init() {
         self.userSession = Auth.auth().currentUser
+        
+        self.fetchUser()
         
         print("DEBUG: User session is \(String(describing: self.userSession?.uid))")
     }
@@ -31,6 +35,7 @@ class AuthViewModel: ObservableObject {
             
             guard let user = result?.user else { return }
             self.userSession = user
+            self.didAuthenticateUser = true
             print("DEBUG: Sign user in successfuly")
             
         }
@@ -46,6 +51,7 @@ class AuthViewModel: ObservableObject {
             
             guard let user = result?.user else { return }
             self.userSession = user
+            self.didAuthenticateUser = true
             print("DEBUG: Register user successfuly")
             
             let data = ["email": email,
@@ -65,10 +71,18 @@ class AuthViewModel: ObservableObject {
     }
     
     func signOut() {
-        // server'da kullanıcı çıkış yapar
-        try? Auth.auth().signOut()
         
         // Arayüzü login view olur
         self.userSession = nil
+        didAuthenticateUser = false
+        
+        // server'da kullanıcı çıkış yapar
+        try? Auth.auth().signOut()
+    }
+    
+    func fetchUser() {
+        guard let uid = self.userSession?.uid else { return }
+        
+        userService.fetchUser(withUid: uid)
     }
 }

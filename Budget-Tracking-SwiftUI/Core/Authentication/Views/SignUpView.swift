@@ -58,10 +58,11 @@ struct SignUpView: View {
                 }
                 .padding(.bottom, 30)
             }
+        .navigationBarBackButtonHidden(true)
         .ignoresSafeArea()
         }
 }
 
-#Preview {
-    SignUpView()
-}
+//#Preview {
+//    SignUpView()
+//}
