@@ -6,12 +6,23 @@
 //
 
 import SwiftUI
+import FirebaseCore
 
 @main
 struct Budget_Tracking_SwiftUIApp: App {
+    
+    @StateObject var authViewModel = AuthViewModel()
+    
+    init() {
+        FirebaseApp.configure()
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                ContentView()
+            }
+            .environmentObject(authViewModel)
         }
     }
 }

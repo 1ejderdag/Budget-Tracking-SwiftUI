@@ -21,6 +21,7 @@ struct HomeView: View {
             ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: adaptive, spacing: 15) {
+                        
                         SummaryView(amount: 1500, currency: "₺", type: "Balance", icon: "equal.circle.fill", iconBG: .blue)
                         SummaryView(amount: 1500, currency: "₺", type: "Average", icon: "plusminus.circle.fill", iconBG: .blue)
                         SummaryView(amount: 1500, currency: "₺", type: "Income", icon: "plus.circle.fill", iconBG: .blue)
@@ -36,8 +37,7 @@ struct HomeView: View {
                     })
                     .pickerStyle(SegmentedPickerStyle())
                     
-                    
-                    VStack {
+                    LazyVStack {
                         ListView()
                         ListView()
                         ListView()
@@ -47,7 +47,7 @@ struct HomeView: View {
                 
                 HStack {
                     Button(action: {
-                        print("Plus Button")
+                        print("plus button clicked")
                     }, label: {
                         ZStack {
                             Circle()
@@ -56,10 +56,7 @@ struct HomeView: View {
                             Image(systemName: "plus")
                                 .foregroundStyle(Color(.white))
                                 .font(.system(size: 28))
-                                
                         }
-                        
-                            
                     })
                 }
                 .padding(.all, 25)
@@ -70,11 +67,17 @@ struct HomeView: View {
                             .fontWeight(.bold)
                             .foregroundStyle(Color(.black))
                     }
+                    
                     ToolbarItem(placement: .topBarTrailing) {
-                        Text("Settings")
-                            .font(.headline)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(Color(.blue))
+                        NavigationLink {
+                            ProfileView()
+                        } label: {
+                            Image(systemName: "person")
+                                .frame(width: 35, height: 35)
+                                .foregroundStyle(Color(.white))
+                                .background(Color(.gray))
+                                .clipShape(Circle())
+                        }
                     }
                 }
             }
