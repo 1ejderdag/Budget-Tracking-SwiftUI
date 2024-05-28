@@ -16,6 +16,8 @@ struct HomeView: View {
     
     @State var selectionPicker: String = "Expense"
     
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
     var body: some View {
         NavigationStack {
             ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
@@ -46,9 +48,10 @@ struct HomeView: View {
                 }
                 
                 HStack {
-                    Button(action: {
-                        print("plus button clicked")
-                    }, label: {
+                    
+                    NavigationLink {
+                        AddView()
+                    } label: {
                         ZStack {
                             Circle()
                                 .frame(width: 55, height: 55)
@@ -57,28 +60,28 @@ struct HomeView: View {
                                 .foregroundStyle(Color(.white))
                                 .font(.system(size: 28))
                         }
-                    })
+                    }
                 }
                 .padding(.all, 25)
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Text("My Wallet")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .foregroundStyle(Color(.black))
-                    }
-                    
-                    ToolbarItem(placement: .topBarTrailing) {
-                        NavigationLink {
-                            ProfileView()
-                        } label: {
-                            Image(systemName: "person")
-                                .frame(width: 35, height: 35)
-                                .foregroundStyle(Color(.white))
-                                .background(Color(.gray))
-                                .clipShape(Circle())
-                        }
-                    }
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Text("My Wallet")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundStyle(Color(.black))
+            }
+            
+            ToolbarItem(placement: .topBarTrailing) {
+                NavigationLink {
+                    ProfileView(user: authViewModel.currentUser)
+                } label: {
+                    Image(systemName: "person")
+                        .frame(width: 35, height: 35)
+                        .foregroundStyle(Color(.white))
+                        .background(Color(.gray))
+                        .clipShape(Circle())
                 }
             }
         }

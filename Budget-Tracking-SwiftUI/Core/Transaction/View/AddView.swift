@@ -10,7 +10,6 @@ import UIKit
 
 struct AddView: View {
     
-    @StateObject var transactionVM: TransactionViewModel
     @State var selectionPicker: CategoryType = .expense
     @State var selectedCategory: Category?
     @State var date: Date = Date()
@@ -161,13 +160,7 @@ struct AddView: View {
                         Spacer()
                         
                         Button {
-                            
-                            //transactionVM.saveTransaction(amount: amount, note: note, date: date, type:.expense, category: Category())
-                            Task {
-                                await CategoryViewModel().createDefaultCategoris()
-                            }
-                            
-                            
+                          print("submit button")
                         } label: {
                             Text("SUBMIT")
                                 .padding()
@@ -188,5 +181,5 @@ struct AddView: View {
 }
 
 #Preview {
-    AddView(transactionVM: TransactionViewModel())
+    AddView()
 }

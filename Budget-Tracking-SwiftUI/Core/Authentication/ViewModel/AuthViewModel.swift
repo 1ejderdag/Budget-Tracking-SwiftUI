@@ -11,10 +11,9 @@ import FirebaseAuth
 
 class AuthViewModel: ObservableObject {
     
-    @Published var userSession = Auth.auth().currentUser
-    @Published var didAuthenticateUser = false
-    @Published var currentUser: User?
-    //private var tempUserSession: FirebaseAuth.User?
+    @Published public var userSession = Auth.auth().currentUser
+    @Published public var didAuthenticateUser = false
+    @Published public var currentUser: User?
     let userService = UserService()
     
     init() {
@@ -35,13 +34,13 @@ class AuthViewModel: ObservableObject {
             
             guard let user = result?.user else { return }
             self.userSession = user
-            self.didAuthenticateUser = true
+            self.fetchUser()
             print("DEBUG: Sign user in successfuly")
             
         }
     }
     
-    func register(withEmail email: String, fullanme: String, password: String) {
+    func register(withEmail email: String, fullname: String, password: String) {
         
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {
@@ -51,11 +50,10 @@ class AuthViewModel: ObservableObject {
             
             guard let user = result?.user else { return }
             self.userSession = user
-            self.didAuthenticateUser = true
             print("DEBUG: Register user successfuly")
             
-            let data = ["email": email,
-                        "fullname": fullanme]
+            let data = ["email": email.lowercased(),
+                        "fullname": fullname]
             
             Firestore.firestore().collection("users")
                 .document(user.uid)
@@ -66,6 +64,7 @@ class AuthViewModel: ObservableObject {
                     }
                     print("DEBUG: User data uploaded")
                     self.didAuthenticateUser = true
+                    self.fetchUser()
                 }
         }
     }
@@ -78,11 +77,14 @@ class AuthViewModel: ObservableObject {
         
         // server'da kullanıcı çıkış yapar
         try? Auth.auth().signOut()
+        print("Sign out")
     }
     
     func fetchUser() {
         guard let uid = self.userSession?.uid else { return }
         
-        userService.fetchUser(withUid: uid)
+        userService.fetchUser(withUid: uid) { user in
+            self.currentUser = user
+        }
     }
 }
