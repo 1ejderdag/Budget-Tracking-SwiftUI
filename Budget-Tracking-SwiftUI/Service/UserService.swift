@@ -4,13 +4,12 @@
 //
 //  Created by Ejder Dağ on 22.05.2024.
 //
-
 import Firebase
 import FirebaseFirestoreSwift
 
 class UserService {
     
-    func fetchUser(withUid uid: String) {
+    func fetchUser(withUid uid: String, completion: @escaping(User) -> Void) {
         
         Firestore.firestore().collection("users")
             .document(uid)
@@ -19,9 +18,8 @@ class UserService {
                 
                 guard let user = try? snapshot.data(as: User.self) else { return }
                 
-                print("User name is \(user.fullname)")
-                print("User name is \(user.email)")
-                //completion(user)
+                print("User email is \(user.email)")
+                completion(user)
             }
     }
 }

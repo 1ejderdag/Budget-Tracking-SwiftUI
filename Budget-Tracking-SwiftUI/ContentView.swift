@@ -20,7 +20,10 @@ struct ContentView: View {
                 LoginView()
             } else {
                 // giriş yapmış kullanıcı var
-                HomeView()
+                if let user = authViewModel.currentUser {
+                    HomeView()
+                        .toolbar(.visible)
+                }
             }
         }
     }
@@ -30,53 +33,3 @@ struct ContentView: View {
 //    ContentView()
 //}
 
-
-/*
- var mainInterface: some View {
-     ZStack(alignment: .topLeading) {
-         HomeView()
-             .toolbar(profileMenu ? .hidden : .visible)
-         
-         if profileMenu {
-             ZStack {
-                 Color(.black)
-                     .opacity(profileMenu ? 0.3 : 0.0)
-             }
-             .onTapGesture {
-                 withAnimation(.easeInOut) {
-                     profileMenu = false
-                 }
-             }
-             .ignoresSafeArea()
-         }
-         
-         ProfileView()
-             .frame(width: 300)
-             .offset(x: profileMenu ? 393 : -200, y: 0)
-             .background(profileMenu ? Color.white : Color.clear)
-     }
-     .navigationTitle("Profile")
-     .navigationBarTitleDisplayMode(.inline)
-     .toolbar {
-         ToolbarItem(placement: .topBarTrailing) {
-             
-             if let user = authViewModel.currentUser {
-                 Button {
-                     withAnimation(.easeInOut) {
-                         profileMenu.toggle()
-                     }
-                 } label: {
-                     Image(systemName: "person")
-                         .frame(width: 35, height: 35)
-                         .foregroundStyle(Color(.white))
-                         .background(Color(.gray))
-                         .clipShape(Circle())
-                 }
-             }
-         }
-     }
-     .onAppear {
-         profileMenu = false // toolbar tekrar açıldığında side menu kapalı olacak.
-     }
- }
- */
