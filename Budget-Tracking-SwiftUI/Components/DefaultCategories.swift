@@ -28,7 +28,6 @@ struct DefaultCategories{
         Category(id: UUID().uuidString, name: "Gift", icon: "giftcard", color: "red", type: "Expense"),
         Category(id: UUID().uuidString, name: "Debt", icon: "creditcard", color: "red", type: "Expense"),
         Category(id: UUID().uuidString, name: "Others", icon: "questionmark", color: "red", type: "Expense")
-        
     ]
 }
 

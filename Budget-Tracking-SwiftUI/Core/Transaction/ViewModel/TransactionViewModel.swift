@@ -7,32 +7,33 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseAuth
 
 final class TransactionViewModel: ObservableObject{
-    
-    @Published var transacitons: [TransactionItem] = []
-    
-    
-    
-    
-    func saveTransaction(amount: Float, note: String, date: Date, type: CategoryType, category: Category) {
         
-        let firestore = Firestore.firestore()
+    func createExpense(amount: Float, note: String, category: ExpenseCategories, date: Date) {
         
-        let firestorePost: [String: Any] = ["id": UUID().uuidString,
-                                            "amount": amount,
-                                            "note": note,
-                                            "date": date,
-                                            "type": type,
-                                            "category": category]
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+                
+        let data = ["uid": uid,
+                    "amount": amount,
+                    "note": note,
+                    "category": category.rawValue] as [String : Any]
         
-        let firestoreRef: DocumentReference = firestore.collection("transactions").addDocument(data: firestorePost, completion: { (error) in
-            if error != nil {
-                print("Kayıt sırasında hata oluştu. Hata: \(String(describing: error?.localizedDescription))")
+        Firestore.firestore().collection("expenses").document()
+            .setData(data) { error in
+                if let error = error {
+                    print("ERROR: \(error.localizedDescription)")
+                    return
+                }
+                print("Expense Created")
             }
-            
-        })
     }
     
+    func createIncome(amount: Float, note: String, category: IncomeCategories, date: Date) {
+        
+        
+    }
+
     
 }
