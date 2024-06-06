@@ -40,14 +40,14 @@ struct HomeView: View {
                     
                     if selectionPicker == .expense {
                         LazyVStack {
-                            ForEach(homeViewModel.expenses) {expense in
-                                ListView(expense: expense)
+                            ForEach(homeViewModel.expenses) { expense in
+                                ListViewExpense(expense: expense)
                             }
                         }
                     } else {
                         LazyVStack {
-                            ForEach(homeViewModel.expenses) {expense in
-                                ListView(expense: expense)
+                            ForEach(homeViewModel.incomes) { income in
+                                ListViewIncome(income: income)
                             }
                         }
                     }
@@ -74,6 +74,7 @@ struct HomeView: View {
         }
         .onAppear {
             homeViewModel.fetchExpense()
+            homeViewModel.fetchIncome()
         }
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -114,7 +115,7 @@ extension HomeView {
                 .clipShape(RoundedRectangle(cornerRadius: 15))
                 .onChange(of: selectionPicker) {
                     withAnimation() {
-                        print("Category Type \(selectionPicker.rawValue)")
+                        // 
                     }
                 }
             }

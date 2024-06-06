@@ -30,4 +30,15 @@ final class HomeViewModel: ObservableObject {
         }
     }
     
+    func fetchIncome() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        service.fetchIncome(forUid: uid) { incomes in
+            self.incomes = incomes
+            for i in 0 ..< incomes.count {
+                self.incomes[i].user = self.user
+            }
+        }
+    }
+
+    
 }

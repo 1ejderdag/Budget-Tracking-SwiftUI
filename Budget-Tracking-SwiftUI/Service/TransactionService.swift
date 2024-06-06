@@ -23,4 +23,18 @@ class TransactionService {
                 completion(expenses)
         }
     }
+    
+    func fetchIncome(forUid uid: String, completion: @escaping([IncomeItem]) -> Void) {
+        Firestore.firestore().collection("incomes")
+            .whereField("uid", isEqualTo: uid)
+            .getDocuments { snapshot, error in
+                if let error = error {
+                    print("ERROR: fetch expense.Error: \(error.localizedDescription)")
+                    return
+                }
+                guard let documents = snapshot?.documents else { return }
+                let incomes = documents.compactMap({ try? $0.data(as: IncomeItem.self) })
+                completion(incomes)
+        }
+    }
 }

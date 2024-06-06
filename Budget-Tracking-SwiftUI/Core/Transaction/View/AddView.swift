@@ -139,7 +139,7 @@ extension AddView {
                 .clipShape(RoundedRectangle(cornerRadius: 15))
                 .onChange(of: selectionPicker) {
                     withAnimation() {
-                        print("Category Type \(selectionPicker.rawValue)")
+                        //
                     }
                 }
             }

@@ -26,6 +26,11 @@ struct ProfileView: View {
                             .font(.headline)
                             .fontWeight(.bold)
                     
+                    Text("@\(user.email)")
+                            .font(.caption)
+                            .fontWeight(.light)
+                            .foregroundStyle(Color(.systemGray))
+                    
                     Divider()
                 }
                 .padding()
@@ -34,7 +39,7 @@ struct ProfileView: View {
                     
                     if rowViewModel == .add {
                         NavigationLink {
-                            // go to add view
+                            AddView()
                         } label: {
                             ProfileRowView(viewModel: rowViewModel)
                         }
