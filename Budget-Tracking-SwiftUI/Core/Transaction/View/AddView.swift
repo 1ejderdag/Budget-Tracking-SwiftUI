@@ -194,7 +194,7 @@ extension AddView {
                 } else {
                     print("else")
                 }
-                
+                dismiss()
                 
             } label: {
                 Text("SUBMIT")

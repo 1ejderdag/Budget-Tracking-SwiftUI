@@ -32,8 +32,20 @@ final class TransactionViewModel: ObservableObject{
     
     func createIncome(amount: Float, note: String, category: IncomeCategories, date: Date) {
         
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+                
+        let data = ["uid": uid,
+                    "amount": amount,
+                    "note": note,
+                    "category": category.rawValue] as [String : Any]
         
+        Firestore.firestore().collection("incomes").document()
+            .setData(data) { error in
+                if let error = error {
+                    print("ERROR: \(error.localizedDescription)")
+                    return
+                }
+                print("Income Created")
+            }
     }
-
-    
 }

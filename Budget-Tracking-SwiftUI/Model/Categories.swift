@@ -34,7 +34,7 @@ enum ExpenseCategories: String, CaseIterable {
     var iconName: String {
         switch self {
             
-        case .home: return "house"
+        case .home: return "house.fill"
         case .food: return "fork.knife"
         case .groceries: return "list.bullet.clipboard"
         case .health: return "cross.case"

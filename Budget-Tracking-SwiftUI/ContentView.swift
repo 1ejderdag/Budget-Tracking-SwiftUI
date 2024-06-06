@@ -13,19 +13,17 @@ struct ContentView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
-        Group {
-            
             if authViewModel.userSession == nil {
                 // giriş yapmış kullanıcı yok
                 LoginView()
             } else {
                 // giriş yapmış kullanıcı var
                 if let user = authViewModel.currentUser {
-                    HomeView()
+                    HomeView(user: user)
                         .toolbar(.visible)
                 }
             }
-        }
+        
     }
 }
     

@@ -40,6 +40,8 @@
 		3AA2BE862BFD698100D342A1 /* RowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA2BE852BFD698100D342A1 /* RowViewModel.swift */; };
 		3AA2BE882BFD6D4800D342A1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA2BE872BFD6D4800D342A1 /* User.swift */; };
 		3AA2BE8A2BFD79AD00D342A1 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA2BE892BFD79AD00D342A1 /* UserService.swift */; };
+		3AAB39B92C0F3E84008C7715 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAB39B82C0F3E84008C7715 /* TransactionService.swift */; };
+		3AAB39BD2C0F3EE2008C7715 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAB39BC2C0F3EE2008C7715 /* HomeViewModel.swift */; };
 		3AC2D5A92C09336A002880F6 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC2D5A82C09336A002880F6 /* Categories.swift */; };
 		3AC7B1B02C035EF20065DD92 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC7B1AF2C035EF20065DD92 /* EmptyView.swift */; };
 /* End PBXBuildFile section */
@@ -76,6 +78,8 @@
 		3AA2BE852BFD698100D342A1 /* RowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowViewModel.swift; sourceTree = "<group>"; };
 		3AA2BE872BFD6D4800D342A1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3AA2BE892BFD79AD00D342A1 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		3AAB39B82C0F3E84008C7715 /* TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
+		3AAB39BC2C0F3EE2008C7715 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		3AC2D5A82C09336A002880F6 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		3AC7B1AF2C035EF20065DD92 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,7 +136,8 @@
 		3A737C272BFD575200B682A1 /* Homepage */ = {
 			isa = PBXGroup;
 			children = (
-				3A1FACF02BB85A0C00C33FA4 /* HomeView.swift */,
+				3AAB39BB2C0F3ECC008C7715 /* View */,
+				3AAB39BA2C0F3EC4008C7715 /* ViewModel */,
 			);
 			path = Homepage;
 			sourceTree = "<group>";
@@ -197,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				3AA2BE892BFD79AD00D342A1 /* UserService.swift */,
+				3AAB39B82C0F3E84008C7715 /* TransactionService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -260,6 +266,22 @@
 				3AA2BE852BFD698100D342A1 /* RowViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3AAB39BA2C0F3EC4008C7715 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3AAB39BC2C0F3EE2008C7715 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3AAB39BB2C0F3ECC008C7715 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3A1FACF02BB85A0C00C33FA4 /* HomeView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		3AB434A02C0576C90011B0A8 /* Transaction */ = {
@@ -387,12 +409,14 @@
 				3AA2BE842BFD693600D342A1 /* ProfileRowView.swift in Sources */,
 				3A8E9A0D2BFD368500CB66CC /* AuthViewModel.swift in Sources */,
 				3A8369E72BC05328004D4197 /* AddView.swift in Sources */,
+				3AAB39BD2C0F3EE2008C7715 /* HomeViewModel.swift in Sources */,
 				3A1FACEF2BB858B100C33FA4 /* LoginView.swift in Sources */,
 				3A1FACF12BB85A0C00C33FA4 /* HomeView.swift in Sources */,
 				3A7E74792BAF1B0F00974425 /* Budget_Tracking_SwiftUIApp.swift in Sources */,
 				3AC7B1B02C035EF20065DD92 /* EmptyView.swift in Sources */,
 				3A8E9A0F2BFD36B600CB66CC /* SignUpView.swift in Sources */,
 				3A59C8452BC088DC00249215 /* CategoryType.swift in Sources */,
+				3AAB39B92C0F3E84008C7715 /* TransactionService.swift in Sources */,
 				3AA2BE862BFD698100D342A1 /* RowViewModel.swift in Sources */,
 				3A36BC882BC4BBAF00FF1BF8 /* CategoryViewModel.swift in Sources */,
 				3A8E9A1E2BFD3CF600CB66CC /* RoundedShape.swift in Sources */,

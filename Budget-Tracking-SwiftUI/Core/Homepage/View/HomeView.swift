@@ -14,9 +14,14 @@ struct HomeView: View {
         GridItem(.adaptive(minimum: 150), spacing: 15)
     ]
     
-    @State var selectionPicker: String = "Expense"
+    @State var selectionPicker: CategoryType = .expense
     
     @EnvironmentObject var authViewModel: AuthViewModel
+    @ObservedObject var homeViewModel: HomeViewModel
+    
+    init(user: User) {
+        self.homeViewModel = HomeViewModel(user: user)
+    }
     
     var body: some View {
         NavigationStack {
@@ -31,20 +36,22 @@ struct HomeView: View {
                     }
                     .padding()
                     
-                    Picker(selection: $selectionPicker, content: {
-                        Text("Expense").tag("Expense")
-                        Text("Income").tag("Income")
-                    }, label: {
-                        Text("Picker")
-                    })
-                    .pickerStyle(SegmentedPickerStyle())
+                    segmentedPickerView
                     
-                    LazyVStack {
-                        ListView()
-                        ListView()
-                        ListView()
-                        ListView()
+                    if selectionPicker == .expense {
+                        LazyVStack {
+                            ForEach(homeViewModel.expenses) {expense in
+                                ListView(expense: expense)
+                            }
+                        }
+                    } else {
+                        LazyVStack {
+                            ForEach(homeViewModel.expenses) {expense in
+                                ListView(expense: expense)
+                            }
+                        }
                     }
+                    
                 }
                 
                 HStack {
@@ -64,6 +71,9 @@ struct HomeView: View {
                 }
                 .padding(.all, 25)
             }
+        }
+        .onAppear {
+            homeViewModel.fetchExpense()
         }
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -88,7 +98,31 @@ struct HomeView: View {
     }
 }
 
-
-#Preview {
-    HomeView()
+extension HomeView {
+    var segmentedPickerView: some View {
+        VStack(alignment: .leading) {
+            Section() {
+                Picker("Category type", selection: $selectionPicker) {
+                    ForEach(CategoryType.allCases, id: \.self) { type in
+                        Text("\(type.localizedName())")
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(10)
+                .frame(maxWidth: .infinity)
+                .background(Color(.secondarySystemBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 15))
+                .onChange(of: selectionPicker) {
+                    withAnimation() {
+                        print("Category Type \(selectionPicker.rawValue)")
+                    }
+                }
+            }
+            .fontWeight(.bold)
+        }
+    }
 }
+
+//#Preview {
+//    HomeView()
+//}

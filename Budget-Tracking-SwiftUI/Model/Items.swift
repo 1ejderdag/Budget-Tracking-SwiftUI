@@ -8,20 +8,22 @@
 import Foundation
 import FirebaseFirestore
 
-struct ExpenseItem {
+struct ExpenseItem: Identifiable, Decodable {
     @DocumentID var id: String?
     let amount: Float
     let note: String
     let category: ExpenseCategories.RawValue
-    let date: Date
     let uid: String
+    
+    var user: User?
 }
 
-struct IncomeItem {
+struct IncomeItem: Identifiable, Decodable {
     @DocumentID var id: String?
     let amount: Float
     let note: String
     let category: IncomeCategories.RawValue
-    let date: Date
     let uid: String
+    
+    var user: User?
 }
